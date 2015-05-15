@@ -2,7 +2,11 @@
 #include "opencv_lib.hpp"	
 #include <math.h>                // OpenCVヘッダ
 #include <time.h>
+
 // change 5(by nagata)
+
+// change 4(by nagata)(anty0902)
+
 #define PI (atan(1.0)*4)
 
 int Hmin = 5, Hmax = 35;										// 色相初期値
