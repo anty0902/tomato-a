@@ -2,7 +2,7 @@
 #include "opencv_lib.hpp"	
 #include <math.h>                // OpenCVヘッダ
 #include <time.h>
-// change 2
+// change 3
 #define PI (atan(1.0)*4)
 
 int Hmin = 5, Hmax = 35;										// 色相初期値
