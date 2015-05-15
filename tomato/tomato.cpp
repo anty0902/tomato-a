@@ -2,6 +2,9 @@
 #include "opencv_lib.hpp"	
 #include <math.h>                // OpenCVヘッダ
 #include <time.h>
+#include <mmsystem.h>
+#include <list>
+#include <numeric>
 
 // change 5(by nagata)
 
@@ -14,6 +17,8 @@ CvPoint *point, *tmp;
 // トラックバー呼び出し関数
 void onTrackbarS(int position, void* val){ Hmin = position; }	// 色相（最小値）
 void onTrackbarL(int position, void* val){ Hmax = position; }	// 色相（最大値）
+
+void FPS(Mat &_src);
 
 int _tmain(int argc, _TCHAR* argv[])
 {
@@ -189,4 +194,36 @@ int _tmain(int argc, _TCHAR* argv[])
 	}
 
 	return 0;
+}
+
+void FPS(Mat &_src){
+	static int frame_n = 0;
+	double fps, meandiffTime;
+	unsigned long nowTime, diffTime, oldTime;
+	list<double> list_t;
+	vector<double> vect_t;
+
+//	nowTime = timeGetTime();
+	diffTime = (int)((nowTime - oldTime));
+//	oldTime = timeGetTime();
+
+	list_t.push_back((double)diffTime);
+
+	if (frame_n >= 3){
+		list_t.pop_front();
+	}
+
+	vect_t.clear();
+	copy(list_t.begin(), list_t.end(), back_inserter(vect_t));
+
+//	meandiffTime = mean(vect_t);
+	fps = 1000.0 / meandiffTime;
+
+	stringstream ss;
+//	ss << showpoint << setw(3) << setprecision(3) << right << fps << " [FPS]";
+
+	//	printf("%3.1f [FPS] %3.0f [ms]\n", fps, meandiffTime);
+	putText(_src, ss.str(), Point(10, 30), FONT_HERSHEY_SIMPLEX, 1, Scalar(0, 255, 0), 2, LINE_AA);
+
+	frame_n++;
 }
