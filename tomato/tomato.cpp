@@ -2,6 +2,8 @@
 #include "opencv_lib.hpp"	
 #include <math.h>                // OpenCVヘッダ
 #include <time.h>
+//567
+
 
 
 #define PI (atan(1.0)*4)
